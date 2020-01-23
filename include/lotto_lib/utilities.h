@@ -26,10 +26,6 @@ void sort_dates(std::vector<date_t>& dates);
 
 void sort_extractions(std::vector<extraction_t>& ex);
 
-void sort_extractions_by_ambo_then_date(std::vector<extraction_t>& ex);
-
-void sort_extractions_by_terno_then_date(std::vector<extraction_t>& ex);
-
 void system_pause(void);
 
 }  // namespace lotto_base

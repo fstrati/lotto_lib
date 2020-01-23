@@ -324,7 +324,7 @@ struct {
 
 void sort_dates(std::vector<date_t>& dates)
 {
-	if( 0 == dates.size() )
+	if( dates.size() <= 1 )
 		return;
 
 	std::sort(dates.begin(), dates.end(), sort_date_function_object);
@@ -368,89 +368,10 @@ struct {
 
 void sort_extractions(std::vector<extraction_t>& ex)
 {
-	if( 0 == ex.size() )
+	if( ex.size() <= 1 )
 		return;
 
 	std::sort(ex.begin(), ex.end(), sort_ex_function_object);
-}
-
-struct {
-	bool operator()(extraction_t a, extraction_t b) const
-	{
-		if( a.bits.a < b.bits.a )
-			return true;
-		else if( a.bits.a == b.bits.a )
-		{
-			if( a.bits.b < b.bits.b )
-				return true;
-			else if( a.bits.b == b.bits.b )
-			{
-				if( a.bits.year < b.bits.year )
-					return true;
-				else if( a.bits.year == b.bits.year )
-				{
-					if( a.bits.month < b.bits.month )
-						return true;
-					else if( a.bits.month == b.bits.month )
-					{
-						if( a.bits.day < b.bits.day )
-							return true;
-						else
-							return false;
-					}
-					else
-						return false;
-				}
-				else
-					return false;
-			}
-			else
-				return false;
-		}
-		else
-			return false;
-	}
-} sort_ex_function_object_by_ambo;
-
-struct {
-	bool operator()(extraction_t a, extraction_t b) const
-	{
-		if( a.bits.a < b.bits.b )
-			return true;
-		else if( a.bits.a == b.bits.a )
-		{
-			if( a.bits.b < b.bits.b )
-				return true;
-			else if( a.bits.b == b.bits.b )
-			{
-				if( a.bits.c < b.bits.c )
-					return true;
-				else
-					return false;
-			}
-			else
-				return false;
-		}
-		else
-			return false;
-	}
-} sort_ex_function_object_by_terno;
-
-void sort_extractions_by_ambo_then_date(std::vector<extraction_t>& ex)
-{
-	if( 0 == ex.size() )
-		return;
-
-	std::sort(ex.begin(), ex.end(), sort_ex_function_object_by_ambo);
-}
-
-void sort_extractions_by_terno_then_date(std::vector<extraction_t>& ex)
-{
-	if( 0 == ex.size() )
-		return;
-
-	/// !!! strange hard fault when using this !!!
-	std::sort(ex.begin(), ex.end(), sort_ex_function_object_by_terno);
 }
 
 void system_pause(void)
